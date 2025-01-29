@@ -179,7 +179,7 @@ class AVADataset(BaseActionDataset):
                 x for x in img_records
                 if np.array_equal(x['entity_box'], img_record['entity_box'])
             ]
-            print(selected_records)
+            print(selected_records, "selected records")
 
             num_selected_records = len(selected_records)
             img_records = [
