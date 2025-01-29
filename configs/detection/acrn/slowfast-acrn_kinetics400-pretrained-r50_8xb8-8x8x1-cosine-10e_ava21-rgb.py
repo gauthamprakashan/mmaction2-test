@@ -48,7 +48,7 @@ model = dict(
             type='BBoxHeadAVA',
             background_class=True,
             in_channels=2304,
-            num_classes=81,
+            num_classes=83,
             multilabel=True,
             dropout_ratio=0.5)),
     data_preprocessor=dict(
@@ -73,20 +73,19 @@ model = dict(
     test_cfg=dict(rcnn=None))
 
 dataset_type = 'AVADataset'
-data_root = 'data/ava/rawframes'
-anno_root = 'data/ava/annotations'
+data_root = 'tools/data/ava/rawframes'
+anno_root = 'tools/data/ava/annotations'
+ann_file_train = f'{anno_root}/output5.csv'
+ann_file_val = f'{anno_root}/output5.csv'
 
-ann_file_train = f'{anno_root}/ava_train_v2.1.csv'
-ann_file_val = f'{anno_root}/ava_val_v2.1.csv'
+# exclude_file_train = f'{anno_root}/ava_train_excluded_timestamps_v2.1.csv'
+# exclude_file_val = f'{anno_root}/ava_val_excluded_timestamps_v2.1.csv'
+exclude_file_train = ''
+exclude_file_val = ''
+label_file = f'{anno_root}/label_map.txt'
 
-exclude_file_train = f'{anno_root}/ava_train_excluded_timestamps_v2.1.csv'
-exclude_file_val = f'{anno_root}/ava_val_excluded_timestamps_v2.1.csv'
-
-label_file = f'{anno_root}/ava_action_list_v2.1_for_activitynet_2018.pbtxt'
-
-proposal_file_train = (f'{anno_root}/ava_dense_proposals_train.FAIR.'
-                       'recall_93.9.pkl')
-proposal_file_val = f'{anno_root}/ava_dense_proposals_val.FAIR.recall_93.9.pkl'
+proposal_file_train = (f'{anno_root}/output1.pkl')
+proposal_file_val = f'{anno_root}/output1.pkl'
 
 file_client_args = dict(io_backend='disk')
 train_pipeline = [
