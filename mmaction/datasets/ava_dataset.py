@@ -187,23 +187,26 @@ class AVADataset(BaseActionDataset):
             ]
 
             assert len(img_records) + num_selected_records == num_img_records
-
+            
             bboxes.append(img_record['entity_box'])
             valid_labels = np.array([
                 selected_record['label']
                 for selected_record in selected_records
             ])
-
+            print(valid_labels, 'valid_labels')
             # The format can be directly used by BCELossWithLogits
             if self.multilabel:
+                print(valid_labels, 'valid_labels')
                 label = np.zeros(self.num_classes, dtype=np.float32)
                 label[valid_labels] = 1.
             else:
+                print(valid_labels, 'valid_labels')
+
                 label = valid_labels
 
             labels.append(label)
             entity_ids.append(img_record['entity_id'])
-        bboxes = np.stack(bboxes)
+        bboxes = np.stack(bboxes),
         labels = np.stack(labels)
         entity_ids = np.stack(entity_ids)
         return bboxes, labels, entity_ids
@@ -215,15 +218,16 @@ class AVADataset(BaseActionDataset):
         records_dict_by_img = defaultdict(list)
         fin = list_from_file(self.ann_file)
         for line in fin:
+            print(line)
             line_split = line.strip().split(',')
-
             label = int(line_split[6])
             if self.custom_classes is not None:
                 if label not in self.custom_classes:
                     continue
                 label = self.custom_classes.index(label)
-
+            print(line_split)
             video_id = line_split[0]
+            print(line_split[1])
             timestamp = int(line_split[1])  # count by second or frame.
             img_key = f'{video_id},{timestamp:04d}'
 
@@ -503,6 +507,7 @@ class AVAKineticsDataset(BaseActionDataset):
                 selected_record['label']
                 for selected_record in selected_records
             ])
+            print(valid-labels)
 
             # The format can be directly used by BCELossWithLogits
             label = np.zeros(self.num_classes, dtype=np.float32)
@@ -559,7 +564,9 @@ class AVAKineticsDataset(BaseActionDataset):
         fin = list_from_file(self.ann_file)
         for line in fin:
             line_split = line.strip().split(',')
-
+            print("testig")
+            #assert len(line_split) == 8, f'Invalid line: {line}'
+            print (line_split[6])
             label = int(line_split[6])
             if self.custom_classes is not None:
                 if label not in self.custom_classes:
