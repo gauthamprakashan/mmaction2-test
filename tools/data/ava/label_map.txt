@@ -44,10 +44,6 @@
 62: work on a computer
 63: write
 64: fight/hit (a person)
-65: give/serve (an object) to (a person)
-66: grab (a person)
-67: hand clap
-68: hand shake
 69: hand wave
 70: hug (a person)
 72: kiss (a person)
@@ -58,3 +54,6 @@
 78: take (an object) from (a person)
 79: talk to (e.g., self, a person, a group)
 80: watch (a person)
+81: Cook
+82: Packing
+83: Clean
