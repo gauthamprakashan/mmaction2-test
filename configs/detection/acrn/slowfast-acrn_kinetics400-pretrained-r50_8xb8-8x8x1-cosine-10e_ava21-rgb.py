@@ -80,8 +80,8 @@ ann_file_val = f'{anno_root}/output5.csv'
 
 exclude_file_train = f'{anno_root}/Exclude.csv'
 exclude_file_val = f'{anno_root}/annotations/exclude2.csv'
-exclude_file_train = ''
-exclude_file_val = ''
+exclude_file_train = f'{anno_root}/Exclude.csv'
+exclude_file_val = f'{anno_root}/annotations/exclude2.csv'
 label_file = f'{anno_root}/label_map.txt'
 
 proposal_file_train = (f'{anno_root}/output1.pkl')
@@ -115,7 +115,7 @@ train_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         ann_file=ann_file_train,
-        exclude_file=exclude_file_train,
+        # exclude_file=exclude_file_train,
         pipeline=train_pipeline,
         label_file=label_file,
         proposal_file=proposal_file_train,
@@ -128,7 +128,7 @@ val_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         ann_file=ann_file_val,
-        exclude_file=exclude_file_val,
+        # exclude_file=exclude_file_val,
         pipeline=val_pipeline,
         label_file=label_file,
         proposal_file=proposal_file_val,
@@ -139,8 +139,9 @@ test_dataloader = val_dataloader
 val_evaluator = dict(
     type='AVAMetric',
     ann_file=ann_file_val,
-    label_file=label_file,
-    exclude_file=exclude_file_val)
+    label_file=label_file
+    # exclude_file=exclude_file_val
+    )
 test_evaluator = val_evaluator
 
 train_cfg = dict(
