@@ -198,7 +198,8 @@ class AVADataset(BaseActionDataset):
             # The format can be directly used by BCELossWithLogits
             if self.multilabel:
                 print(valid_labels, 'valid_labels')
-                label = np.zeros(self.num_classes, dtype=np.float32)
+                print(self.num_classes)
+                label = np.zeros(84, dtype=np.float32)  # Hardcoding num_classes to 83
                 label[valid_labels] = 1.
             else:
                 print(valid_labels, 'valid_labels')
